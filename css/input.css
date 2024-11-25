@@ -2,3 +2,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.stadium{
+    /* shape-outside: url('./../assets/stadium.svg');
+    clip-path: url('./../assets/stadium.svg'); */
+    /* background-image: url('./../assets/stadium.png'); */
+    /* background-size: cover; */
+}
+
+.grid3d{
+    /* background-image: url('./../assets/test.png'); */
+    background-size: contain;
+    background-position: center;
+    aspect-ratio: auto;
+    transform: perspective(1000px) rotateX(13deg);
+}

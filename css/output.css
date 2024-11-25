@@ -555,3 +555,104 @@ video {
 [hidden]:where(:not([hidden="until-found"])) {
   display: none;
 }
+
+.absolute{
+  position: absolute;
+}
+
+.relative{
+  position: relative;
+}
+
+.left-0{
+  left: 0px;
+}
+
+.top-0{
+  top: 0px;
+}
+
+.grid{
+  display: grid;
+}
+
+.h-\[648px\]{
+  height: 648px;
+}
+
+.h-full{
+  height: 100%;
+}
+
+.w-full{
+  width: 100%;
+}
+
+.grid-cols-5{
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-rows-4{
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+
+.border-\[1px\]{
+  border-width: 1px;
+}
+
+.border-white{
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
+}
+
+.bg-\[\#2b2a2a\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(43 42 42 / var(--tw-bg-opacity, 1));
+}
+
+.py-\[100px\]{
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.py-\[50px\]{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.pl-\[50px\]{
+  padding-left: 50px;
+}
+
+.stadium{
+  /* shape-outside: url('./../assets/stadium.svg');
+    clip-path: url('./../assets/stadium.svg'); */
+  /* background-image: url('./../assets/stadium.png'); */
+  /* background-size: cover; */
+}
+
+.grid3d{
+  /* background-image: url('./../assets/test.png'); */
+  background-size: contain;
+  background-position: center;
+  aspect-ratio: auto;
+  transform: perspective(1000px) rotateX(13deg);
+}
+
+@media (min-width: 0px){
+  .sm\:w-\[90\%\]{
+    width: 90%;
+  }
+}
+
+@media (min-width: 768px){
+  .md\:w-\[90\%\]{
+    width: 90%;
+  }
+}
+
+@media (min-width: 1024px){
+  .lg\:w-\[60\%\]{
+    width: 60%;
+  }
+}
