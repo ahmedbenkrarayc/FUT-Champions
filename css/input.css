@@ -11,9 +11,11 @@
 }
 
 .grid3d{
-    /* background-image: url('./../assets/test.png'); */
-    background-size: contain;
-    background-position: center;
-    aspect-ratio: auto;
     transform: perspective(1000px) rotateX(13deg);
+}
+
+.x{
+    background-image: url('./../assets/rush.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
