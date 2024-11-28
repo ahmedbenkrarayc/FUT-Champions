@@ -198,6 +198,10 @@ playersListModal.firstElementChild.lastElementChild.addEventListener('click', ()
 })
 
 //create a new player
+const clearInputs = (inputs) => {
+    inputs.forEach(input => input.value = "")
+}
+
 const createNewPlayer = () => {
     const name = document.getElementById('name')
     const position = document.getElementById('position')
@@ -246,6 +250,7 @@ const createNewPlayer = () => {
     
         players.push(data)
         localStorage.setItem('players', JSON.stringify(players))
+        clearInputs([ name, position, image, nationality, flag, club, logo, rating, pace, shooting, passing, dribbling, defending, physical])
         hideModal(createModal)
     }
 }
