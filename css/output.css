@@ -584,10 +584,6 @@ video {
   top: 0px;
 }
 
-.right-0{
-  right: 0px;
-}
-
 .m-auto{
   margin: auto;
 }
@@ -634,16 +630,16 @@ video {
   margin-top: 1rem;
 }
 
+.mt-6{
+  margin-top: 1.5rem;
+}
+
 .mt-\[-8px\]{
   margin-top: -8px;
 }
 
 .mt-\[30px\]{
   margin-top: 30px;
-}
-
-.mt-6{
-  margin-top: 1.5rem;
 }
 
 .block{
@@ -974,6 +970,11 @@ video {
 
 .hideModal{
   animation: movetoleft 700ms ease-in-out forwards;
+}
+
+.inputError{
+  --tw-border-opacity: 1;
+  border-color: rgb(220 38 38 / var(--tw-border-opacity, 1));
 }
 
 .\*\:block > *{
