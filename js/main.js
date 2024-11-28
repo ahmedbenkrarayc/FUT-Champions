@@ -1,5 +1,13 @@
 const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : []
 
+//positions
+
+const positions = {
+    def: ['CB', 'LB', 'RB'],
+    mid: ['CM', 'CDM', 'RM', 'LM'],
+    att: ['LW', 'ST', 'RW'],
+}
+
 //validation
 const validators = {
     name: /^[A-Za-z ]{3,}$/,
@@ -307,3 +315,100 @@ document.getElementById('position').addEventListener('change', (e) => {
         physical.setAttribute('placeholder', 'Enter player physical')
     }
 })
+
+//display players in pick players modal
+
+const getPlayerStatisticsHTML = (item) => {
+    if(item.position == 'GK'){
+        return `
+            <div class="*:block *:font-semibold">
+                <span>Div</span>
+                <span>${item.diving}</span>
+            </div>
+            <div class="*:block *:font-semibold">
+                <span>Han</span>
+                <span>${item.handling}</span>
+            </div>
+            <div class="*:block *:font-semibold">
+                <span>Kic</span>
+                <span>${item.kicking}</span>
+            </div>
+            <div class="*:block *:font-semibold">
+                <span>Ref</span>
+                <span>${item.reflexes}</span>
+            </div>
+            <div class="*:block *:font-semibold">
+                <span>Spd</span>
+                <span>${item.speed}</span>
+            </div>
+            <div class="*:block *:font-semibold">
+                <span>Pos</span>
+                <span>${item.positioning}</span>
+            </div>
+        `
+    }
+
+    return `
+        <div class="*:block *:font-semibold">
+            <span>Pac</span>
+            <span>${item.pace}</span>
+        </div>
+        <div class="*:block *:font-semibold">
+            <span>Sho</span>
+            <span>${item.shooting}</span>
+        </div>
+        <div class="*:block *:font-semibold">
+            <span>Pas</span>
+            <span>${item.passing}</span>
+        </div>
+        <div class="*:block *:font-semibold">
+            <span>Dri</span>
+            <span>${item.dribbling}</span>
+        </div>
+        <div class="*:block *:font-semibold">
+            <span>Def</span>
+            <span>${item.defending}</span>
+        </div>
+        <div class="*:block *:font-semibold">
+            <span>Phy</span>
+            <span>${item.physical}</span>
+        </div>
+    `
+}
+
+const displayPlayersPickModal = () => {
+    const container = document.getElementById('pickPlayersList')
+    const filtered = [...players]
+    container.innerHTML = ''
+
+    filtered.forEach(item => {
+        container.innerHTML += `
+            <div class="w-[160px] relative cursor-pointer">
+                <div class="relative w-[90%]">
+                    <img class="w-full mx-auto" src="./assets/rush.png" alt="">
+                    <div class="absolute top-0 left-0 w-full h-full inset-0 m-auto px-2 py-2">
+                        <div class="flex">
+                            <div class="mt-4 ml-[11px] text-white *:font-poppins *:block text-[80%]">
+                                <span class="font-bold">${item.rating}</span>
+                                <span class="font-semibold mt-[-8px]">${item.position}</span>
+                            </div>
+                            <img class="w-[70%] h-[70%] object-cover" src="${item.image}" alt="">
+                        </div>
+                        <div class="text-white">
+                            <h1 class="text-center text-xs font-semibold mt-1">Messi</h1>
+                            <div class="flex justify-around text-[6%] mt-1">
+                                ${getPlayerStatisticsHTML(item)}
+                            </div>
+                            <div class="flex w-fit mx-auto *:w-[18px] *:h-[10px] mt-1">
+                                <img src="${item.flag}" alt="">
+                                <img src="${item.logo}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    })
+}
+
+displayPlayersPickModal()
