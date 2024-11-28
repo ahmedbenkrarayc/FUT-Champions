@@ -1,10 +1,9 @@
-const players = []
+const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : []
 
 //validation
 const validators = {
     name: /^[A-Za-z ]{3,}$/,
     url: /\.(png|jpg|jpeg|webp|gif)$/,
-    position: /^[A-Z]{1,3}$/,
     club: /^[A-Za-z ]+$/,
     stats: /^[1-9][0-9]?$/,
 }
@@ -58,7 +57,7 @@ const validation = (data) => {
         manageValidationErrors(data.image, '')
     }
 
-    if(!validators.nationality.test(data.nationality.value.trim())){
+    if(!validators.name.test(data.nationality.value.trim())){
         //validation error style
         manageValidationErrors(data.nationality, 'Please Enter a valid nationality !')
         return false
