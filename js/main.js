@@ -22,12 +22,21 @@ const manageValidationErrors = (input, error) => {
 }
 
 const validation = (data) => {
-    if(!validators.name.test(data.name.value)){
+    if(!validators.name.test(data.name.value.trim())){
         //validation error style
         manageValidationErrors(data.name, 'Please Enter a valid name !')
         return false
     }else{
         //clear validation error style
+        manageValidationErrors(data.name, '')
+    }
+
+    const exists = players.find(item => item.name.toLowerCase() == data.name.value.toLowerCase().trim())
+    if(exists){
+        //validation error style
+        manageValidationErrors(data.name, 'This player already exists !')
+        return false
+    }else{
         manageValidationErrors(data.name, '')
     }
 
@@ -40,7 +49,7 @@ const validation = (data) => {
         manageValidationErrors(data.position, '')
     }
 
-    if(!validators.url.test(data.image.value)){
+    if(!validators.url.test(data.image.value.trim())){
         //validation error style
         manageValidationErrors(data.image, 'Please Enter a valid image !')
         return false
@@ -49,7 +58,7 @@ const validation = (data) => {
         manageValidationErrors(data.image, '')
     }
 
-    if(!validators.nationality.test(data.nationality.value)){
+    if(!validators.nationality.test(data.nationality.value.trim())){
         //validation error style
         manageValidationErrors(data.nationality, 'Please Enter a valid nationality !')
         return false
@@ -58,7 +67,7 @@ const validation = (data) => {
         manageValidationErrors(data.nationality, '')
     }
 
-    if(!validators.url.test(data.flag.value)){
+    if(!validators.url.test(data.flag.value.trim())){
         //validation error style
         manageValidationErrors(data.flag, 'Please Enter a valid flag !')
         return false
@@ -67,7 +76,7 @@ const validation = (data) => {
         manageValidationErrors(data.flag, '')
     }
 
-    if(!validators.name.test(data.club.value)){
+    if(!validators.name.test(data.club.value.trim())){
         //validation error style
         manageValidationErrors(data.club, 'Please Enter a valid club !')
         return false
@@ -76,7 +85,7 @@ const validation = (data) => {
         manageValidationErrors(data.club, '')
     }
 
-    if(!validators.url.test(data.logo.value)){
+    if(!validators.url.test(data.logo.value.trim())){
         //validation error style
         manageValidationErrors(data.logo, 'Please Enter a valid logo !')
         return false
@@ -208,36 +217,38 @@ const createNewPlayer = () => {
 
     //validation
 
-    const data = {
-        name : name.value,
-        position : position.value,
-        image : image.value,
-        nationality : nationality.value,
-        flag : flag.value,
-        club : club.value,
-        logo : logo.value,
-        rating : rating.value,
+    if(validation({ name, position, image, nationality, flag, club, logo, rating, pace, shooting, passing, dribbling, defending, physical })){
+        const data = {
+            name : name.value.trim(),
+            position : position.value,
+            image : image.value.trim(),
+            nationality : nationality.value.trim(),
+            flag : flag.value.trim(),
+            club : club.value.trim(),
+            logo : logo.value.trim(),
+            rating : rating.value,
+        }
+    
+        if(position == 'GK'){
+            data['diving'] = pace.value,
+            data['handling'] = shooting.value,
+            data['kicking'] = passing.value,
+            data['reflexes'] = dribbling.value,
+            data['speed'] = defending.value,
+            data['positioning'] = physical.value
+        }else{
+            data['pace'] = pace.value,
+            data['shooting'] = shooting.value,
+            data['passing'] = passing.value,
+            data['dribbling'] = dribbling.value,
+            data['defending'] = defending.value,
+            data['physical'] = physical.value
+        }
+    
+        players.push(data)
+        localStorage.setItem('players', JSON.stringify(players))
+        hideModal(createModal)
     }
-
-    if(position == 'GK'){
-        data['diving'] = pace.value,
-        data['handling'] = shooting.value,
-        data['kicking'] = passing.value,
-        data['reflexes'] = dribbling.value,
-        data['speed'] = defending.value,
-        data['positioning'] = physical.value
-    }else{
-        data['pace'] = pace.value,
-        data['shooting'] = shooting.value,
-        data['passing'] = passing.value,
-        data['dribbling'] = dribbling.value,
-        data['defending'] = defending.value,
-        data['physical'] = physical.value
-    }
-
-    players.push(data)
-    localStorage.setItem('players', JSON.stringify(players))
-    hideModal(createModal)
 }
 
 document.getElementById('add-player').addEventListener('click', (e) => {
