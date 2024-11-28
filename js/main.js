@@ -5,7 +5,6 @@ const validators = {
     name: /^[A-Za-z ]{3,}$/,
     url: /\.(png|jpg|jpeg|webp|gif)$/,
     position: /^[A-Z]{1,3}$/,
-    nationality: /^[A-Za-z ]+$/,
     club: /^[A-Za-z ]+$/,
     stats: /^[1-9][0-9]?$/,
 }
@@ -20,6 +19,136 @@ const manageValidationErrors = (input, error) => {
             input.removeAttribute('title')
         }
     }
+}
+
+const validation = (data) => {
+    if(!validators.name.test(data.name.value)){
+        //validation error style
+        manageValidationErrors(data.name, 'Please Enter a valid name !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.name, '')
+    }
+
+    if(data.position.value.trim() == ""){
+        //validation error style
+        manageValidationErrors(data.position, 'Please Enter a valid position !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.position, '')
+    }
+
+    if(!validators.url.test(data.image.value)){
+        //validation error style
+        manageValidationErrors(data.image, 'Please Enter a valid image !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.image, '')
+    }
+
+    if(!validators.nationality.test(data.nationality.value)){
+        //validation error style
+        manageValidationErrors(data.nationality, 'Please Enter a valid nationality !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.nationality, '')
+    }
+
+    if(!validators.url.test(data.flag.value)){
+        //validation error style
+        manageValidationErrors(data.flag, 'Please Enter a valid flag !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.flag, '')
+    }
+
+    if(!validators.name.test(data.club.value)){
+        //validation error style
+        manageValidationErrors(data.club, 'Please Enter a valid club !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.club, '')
+    }
+
+    if(!validators.url.test(data.logo.value)){
+        //validation error style
+        manageValidationErrors(data.logo, 'Please Enter a valid logo !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.logo, '')
+    }
+
+    if(!validators.stats.test(data.rating.value)){
+        //validation error style
+        manageValidationErrors(data.rating, 'Please Enter a valid rating !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.rating, '')
+    }
+
+    if(!validators.stats.test(data.pace.value)){
+        //validation error style
+        manageValidationErrors(data.pace, 'Statistics should be numbers !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.pace, '')
+    }
+
+    if(!validators.stats.test(data.shooting.value)){
+        //validation error style
+        manageValidationErrors(data.shooting, 'Statistics should be numbers !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.shooting, '')
+    }
+
+    if(!validators.stats.test(data.passing.value)){
+        //validation error style
+        manageValidationErrors(data.passing, 'Statistics should be numbers !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.passing, '')
+    }
+
+    if(!validators.stats.test(data.dribbling.value)){
+        //validation error style
+        manageValidationErrors(data.dribbling, 'Statistics should be numbers !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.dribbling, '')
+    }
+
+    if(!validators.stats.test(data.defending.value)){
+        //validation error style
+        manageValidationErrors(data.defending, 'Statistics should be numbers !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.defending, '')
+    }
+
+    if(!validators.stats.test(data.physical.value)){
+        //validation error style
+        manageValidationErrors(data.physical, 'Statistics should be numbers !')
+        return false
+    }else{
+        //clear validation error style
+        manageValidationErrors(data.physical, '')
+    }
+
+    return true
 }
 
 const createModal = document.getElementById('create-modal')
@@ -88,12 +217,22 @@ const createNewPlayer = () => {
         club : club.value,
         logo : logo.value,
         rating : rating.value,
-        pace : pace.value,
-        shooting : shooting.value,
-        passing : passing.value,
-        dribbling : dribbling.value,
-        defending : defending.value,
-        physical : physical.value
+    }
+
+    if(position == 'GK'){
+        data['diving'] = pace.value,
+        data['handling'] = shooting.value,
+        data['kicking'] = passing.value,
+        data['reflexes'] = dribbling.value,
+        data['speed'] = defending.value,
+        data['positioning'] = physical.value
+    }else{
+        data['pace'] = pace.value,
+        data['shooting'] = shooting.value,
+        data['passing'] = passing.value,
+        data['dribbling'] = dribbling.value,
+        data['defending'] = defending.value,
+        data['physical'] = physical.value
     }
 
     players.push(data)
