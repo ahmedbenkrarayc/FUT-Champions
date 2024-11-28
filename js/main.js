@@ -395,7 +395,7 @@ const displayPlayersPickModal = () => {
                             <img class="w-[70%] h-[70%] object-cover" src="${item.image}" alt="">
                         </div>
                         <div class="text-white">
-                            <h1 class="text-center text-xs font-semibold mt-1">Messi</h1>
+                            <h1 class="text-center text-xs font-semibold mt-1">${item.name}</h1>
                             <div class="flex justify-around text-[6%] mt-1">
                                 ${getPlayerStatisticsHTML(item)}
                             </div>
