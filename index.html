@@ -132,5 +132,98 @@
             <img class="size-[50px] absolute inset-0 m-auto" src="./assets/plus.svg" alt="">
         </div>
     </div>
+
+    <!-- create modal -->
+    <div id="create-modal" class="fixed top-0 right-[-100%] bg-white shadow-2xl h-screen sm:w-[90%] md:w-[400px] ml-auto rounded-l-md overflow-y-scroll [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-lg">
+        <div class="px-6 py-4 text-[#707085] flex items-center justify-between border-b">
+            <span class="block font-medium text-[12px]"><i class="fa-brands fa-trello mr-2"></i>EA FC 25</span>
+            <i class="block fa-solid fa-xmark cursor-pointer"></i>
+        </div>
+        <div class="px-6 pt-6">
+            <h1 class="text-[24px] font-semibold">Create A New Player</h1>
+
+            <form class="my-[30px]" action="" method="post">
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter name" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="cstatus">Position</label>
+                    <select id="cstatus" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                        <option value="" selected disabled>Select a position</option>
+                        <option value="GK">GK</option>
+                        <option value="LWB">LWB</option>
+                        <option value="LB">LB</option>
+                        <option value="CB">CB</option>
+                        <option value="RB">RB</option>
+                        <option value="RWB">RWB</option>
+                        <option value="CAM">CAM</option>
+                        <option value="CM">CM</option>
+                        <option value="CDM">CDM</option>
+                        <option value="RM">RM</option>
+                        <option value="LM">LM</option>
+                        <option value="ST">ST</option>
+                        <option value="CF">CF</option>
+                        <option value="RW">RW</option>
+                        <option value="LW">LW</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="image">Image</label>
+                    <input type="text" id="image" placeholder="Enter player image" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="nationality">Nationality</label>
+                    <input type="text" id="nationality" placeholder="Enter player's nationality" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="flag">Flag</label>
+                    <input type="text" id="flag" placeholder="Enter flag" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="club">Club</label>
+                    <input type="text" id="club" placeholder="Enter player's club" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="logo">Logo</label>
+                    <input type="text" id="logo" placeholder="Enter logo" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="note">Note</label>
+                    <input type="text" id="note" placeholder="Enter player's note" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="rating">Rating</label>
+                    <input type="text" id="rating" placeholder="Enter player's rating" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="pace">Pace</label>
+                    <input type="text" id="pace" placeholder="Enter player's pace" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="shooting">Shooting</label>
+                    <input type="text" id="shooting" placeholder="Enter player's shooting" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="passing">Passing</label>
+                    <input type="text" id="passing" placeholder="Enter player's passing" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="dribbling">Dribbling</label>
+                    <input type="text" id="dribbling" placeholder="Enter player's dribbling" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="defending">Defending</label>
+                    <input type="text" id="defending" placeholder="Enter player's defending" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+                <div class="mb-4">
+                    <label class="text-[13px] font-medium" for="physical">Physical</label>
+                    <input type="text" id="physical" placeholder="Enter player's physical" class="block shadow w-full px-4 py-2 text-[12px] outline-none border rounded-md mt-1">
+                </div>
+
+                <button id="createtask" class="text-xs font-medium bg-primary text-white w-fit h-fit px-4 py-2 rounded-md shadow"><i class="fa-solid fa-plus mr-1"></i>Create</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

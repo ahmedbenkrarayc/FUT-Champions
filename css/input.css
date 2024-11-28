@@ -3,19 +3,32 @@
 @tailwind components;
 @tailwind utilities;
 
-.stadium{
-    /* shape-outside: url('./../assets/stadium.svg');
-    clip-path: url('./../assets/stadium.svg'); */
-    /* background-image: url('./../assets/stadium.png'); */
-    /* background-size: cover; */
-}
-
 .grid3d{
     transform: perspective(1000px) rotateX(13deg);
 }
 
-.x{
-    background-image: url('./../assets/rush.png');
-    background-size: contain;
-    background-repeat: no-repeat;
+@keyframes movetoright{
+    from{
+        right: -100%;
+    }
+    to{
+        right: 0;
+    }
+}
+
+.showModal{
+    animation: movetoright 700ms ease-in-out forwards;
+}
+
+@keyframes movetoleft{
+    from{
+        right: 0;
+    }
+    to{
+        right: -100%;
+    }
+}
+
+.hideModal{
+    animation: movetoleft 700ms ease-in-out forwards;
 }
