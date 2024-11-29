@@ -462,7 +462,7 @@ const addToStadium = (item, target) => {
         if(!isEmpty){
             selectedPlayers = selectedPlayers.filter(i => i != document.querySelector('[post='+target+']').id)
         }
-    
+        
         document.querySelector('[post='+target+']').innerHTML = `
             <div class="relative w-[90%]">
                 <img class="w-full mx-auto" src="./assets/rush.png" alt="">
@@ -513,4 +513,5 @@ const addToStadium = (item, target) => {
     }
     document.querySelector('[post='+target+']').id = player.id
     selectedPlayers.push(player.id)
+    hideModal(playersListModal)
 }
