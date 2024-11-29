@@ -1,5 +1,5 @@
 const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : []
-
+let selectedPlayers = []
 //positions
 
 const positions = {
@@ -196,8 +196,10 @@ createModal.firstElementChild.lastElementChild.addEventListener('click', () => {
 
 //players list modal
 Array.from(playersListOpenBtns).forEach(item => {
-    item.addEventListener('click', () => {
+    item.addEventListener('click', (e) => {
         showModal(playersListModal)
+        let position = e.currentTarget.getAttribute('post') ? e.currentTarget.getAttribute('post').split('-')[0] : ''
+        displayPlayersPickModal(position, e.currentTarget)
     })
 })
 
@@ -230,6 +232,7 @@ const createNewPlayer = () => {
 
     if(validation({ name, position, image, nationality, flag, club, logo, rating, pace, shooting, passing, dribbling, defending, physical })){
         const data = {
+            id: players.length > 0 ? players[players.length - 1].id : 1,
             name : name.value.trim(),
             position : position.value,
             image : image.value.trim(),
@@ -376,14 +379,28 @@ const getPlayerStatisticsHTML = (item) => {
     `
 }
 
-const displayPlayersPickModal = () => {
+const displayPlayersPickModal = (position = '', target = null) => {
+    let filtered = [...players]
     const container = document.getElementById('pickPlayersList')
-    const filtered = [...players]
+    if(position != ''){
+        if(position == 'att'){
+            filtered = filtered.filter(item => positions.att.findIndex(i => i == item.position) != -1)
+        }else if(position == 'mid'){
+            filtered = filtered.filter(item => positions.mid.findIndex(i => i == item.position) != -1)
+        }else if(position == 'def'){
+            filtered = filtered.filter(item => positions.def.findIndex(i => i == item.position) != -1)
+        }else if(position == 'gk'){
+            filtered = filtered.filter(item => item.position == 'GK')
+        }
+    }
+
+    filtered = filtered.filter(item => selectedPlayers.findIndex(i => i == item.id) == -1)
+
     container.innerHTML = ''
 
     filtered.forEach(item => {
         container.innerHTML += `
-            <div class="w-[160px] relative cursor-pointer">
+            <div class="w-[160px] relative cursor-pointer" onclick="addToStadium(${item.id}, '${target.getAttribute('post')}')">
                 <div class="relative w-[90%]">
                     <img class="w-full mx-auto" src="./assets/rush.png" alt="">
                     <div class="absolute top-0 left-0 w-full h-full inset-0 m-auto px-2 py-2">
@@ -411,4 +428,89 @@ const displayPlayersPickModal = () => {
     })
 }
 
-displayPlayersPickModal()
+const addToStadium = (item, target) => {
+    const player = players.find(i => i.id == item)
+    if(target.includes('change')){
+        document.querySelector('[post='+target+']').innerHTML = `
+        <div class="w-[160px] relative cursor-pointer">
+                <div class="relative w-[90%]">
+                    <img class="w-full mx-auto" src="./assets/rush.png" alt="">
+                    <div class="absolute top-0 left-0 w-full h-full inset-0 m-auto px-2 py-2">
+                        <div class="flex">
+                            <div class="mt-4 ml-[11px] text-white *:font-poppins *:block text-[80%]">
+                                <span class="font-bold">${player.rating}</span>
+                                <span class="font-semibold mt-[-8px]">${player.position}</span>
+                            </div>
+                            <img class="w-[70%] h-[70%] object-cover" src="${player.image}" alt="">
+                        </div>
+                        <div class="text-white">
+                            <h1 class="text-center text-xs font-semibold mt-1">${player.name}</h1>
+                            <div class="flex justify-around text-[6%] mt-1">
+                                ${getPlayerStatisticsHTML(player)}
+                            </div>
+                            <div class="flex w-fit mx-auto *:w-[18px] *:h-[10px] mt-1">
+                                <img src="${player.flag}" alt="">
+                                <img src="${player.logo}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    }else{
+        const isEmpty = document.querySelector('[post='+target+']').firstElementChild.childElementCount == 0 
+        if(!isEmpty){
+            selectedPlayers = selectedPlayers.filter(i => i != document.querySelector('[post='+target+']').id)
+        }
+    
+        document.querySelector('[post='+target+']').innerHTML = `
+            <div class="relative w-[90%]">
+                <img class="w-full mx-auto" src="./assets/rush.png" alt="">
+                <div class="absolute top-0 left-0 w-full h-full inset-0 m-auto px-2 py-2">
+                    <div class="flex">
+                        <div class="mt-4 ml-[11px] text-white *:font-poppins *:block text-[80%]">
+                            <span class="font-bold">${player.rating}</span>
+                            <span class="font-semibold mt-[-8px]">${player.position}</span>
+                        </div>
+                        <img class="w-[70%] h-[70%] object-cover" src="${player.image}" alt="">
+                    </div>
+                    <div class="text-white">
+                        <h1 class="text-center text-xs font-semibold mt-1">${player.name}</h1>
+                        <div class="flex justify-around text-[6%] mt-1">
+                            <div class="*:block *:font-semibold">
+                                <span>${player.position != 'GK' ? 'Pac' : 'Div'}</span>
+                                <span>${player.position != 'GK' ? player.pace : player.diving}</span>
+                            </div>
+                            <div class="*:block *:font-semibold">
+                                <span>${player.position != 'GK' ? 'Sho' : 'Han'}</span>
+                                <span>${player.position != 'GK' ? player.shooting : player.handling}</span>
+                            </div>
+                            <div class="*:block *:font-semibold">
+                                <span>${player.position != 'GK' ? 'Pas' : 'Kic'}</span>
+                                <span>${player.position != 'GK' ? player.passing : player.kicking}</span>
+                            </div>
+                            <div class="*:block *:font-semibold">
+                                <span>${player.position != 'GK' ? 'Dri' : 'Ref'}</span>
+                                <span>${player.position != 'GK' ? player.dribbling : player.reflexes}</span>
+                            </div>
+                            <div class="*:block *:font-semibold">
+                                <span>${player.position != 'GK' ? 'Def' : 'Spd'}</span>
+                                <span>${player.position != 'GK' ? player.defending : player.speed}</span>
+                            </div>
+                            <div class="*:block *:font-semibold">
+                                <span>${player.position != 'GK' ? 'Phy' : 'Pas'}</span>
+                                <span>${player.position != 'GK' ? player.physical : player.positioning}</span>
+                            </div>
+                        </div>
+                        <div class="flex w-fit mx-auto *:w-[18px] *:h-[10px] mt-1">
+                            <img src="${player.flag}" alt="">
+                            <img src="${player.logo}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    }
+    document.querySelector('[post='+target+']').id = player.id
+    selectedPlayers.push(player.id)
+}
