@@ -201,6 +201,23 @@ Array.from(playersListOpenBtns).forEach(item => {
         let position = e.currentTarget.getAttribute('post') ? e.currentTarget.getAttribute('post').split('-')[0] : ''
         displayPlayersPickModal(position, e.currentTarget)
     })
+
+    //remove a player from card
+    item.addEventListener('contextmenu', (e) => {
+        e.preventDefault()
+        if(e.currentTarget.id){
+            selectedPlayers = selectedPlayers.filter(item => item != e.currentTarget.id)
+            if(e.currentTarget.getAttribute('post').includes('change')){
+                document.getElementById(e.currentTarget.id).innerHTML = `
+                    <img class="mx-auto" src="./assets/rush.webp" alt="">
+                    <img class="size-[50px] absolute inset-0 m-auto" src="./assets/plus.svg" alt="">
+                `
+            }else{
+                document.getElementById(e.currentTarget.id).innerHTML = `<img class="w-[90%] mx-auto" src="./assets/rush.webp" alt="">`
+            }
+            document.getElementById(e.currentTarget.id).removeAttribute('id')
+        }
+    })
 })
 
 playersListModal.firstElementChild.lastElementChild.addEventListener('click', () => {
