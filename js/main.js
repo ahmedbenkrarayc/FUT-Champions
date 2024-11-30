@@ -209,8 +209,8 @@ Array.from(playersListOpenBtns).forEach(item => {
             selectedPlayers = selectedPlayers.filter(item => item != e.currentTarget.id)
             if(e.currentTarget.getAttribute('post').includes('change')){
                 document.getElementById(e.currentTarget.id).innerHTML = `
-                    <img class="mx-auto" src="./assets/rush.webp" alt="">
-                    <img class="size-[50px] absolute inset-0 m-auto" src="./assets/plus.svg" alt="">
+                    <img class="mx-auto" src="./assets/rush.webp" alt="" draggable="false">
+                    <img class="size-[50px] absolute inset-0 m-auto" src="./assets/plus.svg" alt="" draggable="false">
                 `
             }else{
                 document.getElementById(e.currentTarget.id).innerHTML = `<img class="w-[90%] mx-auto" src="./assets/rush.webp" alt="">`
@@ -532,3 +532,45 @@ const addToStadium = (item, target) => {
     selectedPlayers.push(player.id)
     hideModal(playersListModal)
 }
+
+//make a change using drag & drop
+let selectedCard = null
+document.querySelectorAll('.change-card').forEach(item => {
+    item.addEventListener('dragstart', (e) => {
+        selectedCard = e.currentTarget
+    })
+})
+
+document.querySelectorAll('.stadiumcard').forEach(item => {
+    item.addEventListener('dragover', (e) => {
+        e.preventDefault()
+    })
+
+    item.addEventListener('drop', (e) => {
+        e.preventDefault()
+        if(selectedCard && selectedCard.id){
+            const position = e.currentTarget.getAttribute('post').split('-')[0]
+            const player = players.find(item => item.id == selectedCard.id)
+            if(position != 'gk'){
+                const result = positions[position].findIndex(item => item == player.position)
+                if(result != -1){
+                    document.getElementById(selectedCard.id).innerHTML = `
+                        <img class="mx-auto" src="./assets/rush.webp" alt="" draggable="false">
+                        <img class="size-[50px] absolute inset-0 m-auto" src="./assets/plus.svg" alt="" draggable="false">
+                    `
+                    addToStadium(selectedCard.id, e.currentTarget.getAttribute('post'))
+                }
+            }else{
+                if(position.toLowerCase() == player.position.toLowerCase()){
+                    document.getElementById(selectedCard.id).innerHTML = `
+                        <img class="mx-auto" src="./assets/rush.webp" alt="" draggable="false">
+                        <img class="size-[50px] absolute inset-0 m-auto" src="./assets/plus.svg" alt="" draggable="false">
+                    `
+                    addToStadium(selectedCard.id, e.currentTarget.getAttribute('post'))
+                }
+            }
+            
+            selectedCard = null
+        }
+    })
+})
