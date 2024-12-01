@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="./css/output.css">
 </head>
 <body class="bg-[#2b2a2a] font-poppins">
-    <header class="p-[50px] bg-[url('./../assets/frontpage_bg.png')] bg-cover bg-no-repeat bg-blend-multiply flex items-center justify-between text-white">
+    <header class="p-[50px] bg-[url('./../assets/frontpage_bg.png')] bg-cover bg-no-repeat bg-blend-multiply sm:block md:flex items-center justify-between text-white">
         <div>
             <h1 class="font-semibold text-lg">EA FC 25 Tactics & Formations</h1>
             <p class="text-xs">Build Custom Tactics & Formations</p>
             <p class="text-xs">4-3-3</p>
         </div>
-        <div class="text-xs flex gap-4">
+        <div class="text-xs flex gap-4 sm:mt-6 md:mt-0">
             <button id="create-player">Add new player</button>
             <span id="score">score : 0</span>
         </div>
     </header>
-    <div class="sm:w-[90%] md:w-[90%] lg:w-[60%] relative mx-auto h-[700px]">
+    <div class="sm:w-[90%] md:w-[90%] lg:w-[60%] relative mx-auto sm:h-[500px] md:h-[700px]">
         <img class="w-full h-full grid3d" src="./assets/test.png" alt="stadium image">
         <div class="grid3d h-full grid grid-cols-5 grid-rows-4 absolute w-full top-0 left-0 *:flex *:items-end">
             <div class="stadCard stadiumcard cursor-pointer" post="att-1" positions="lw"><img class="w-[90%] mx-auto" src="./assets/rush.webp" alt=""></div>
@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <div class="mt-28 px-[50px] flex flex-wrap items-center gap-6">
+    <div class="mt-28 md:px-[50px] flex flex-wrap justify-center items-center gap-6">
         <div post="change1" class="stadCard change-card w-[160px] relative cursor-pointer" draggable="true">
             <img class="mx-auto" src="./assets/rush.webp" alt="" draggable="false">
             <img class="size-[50px] absolute inset-0 m-auto" src="./assets/plus.svg" alt="" draggable="false">
@@ -176,7 +176,7 @@
     </div>
 
     <!-- players list modal -->
-    <div id="list-modal" class="fixed top-0 right-[-100%] bg-white shadow-2xl h-screen sm:w-[90%] md:w-[400px] ml-auto rounded-l-md overflow-y-scroll [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-lg">
+    <div id="list-modal" class="fixed top-0 right-[-100%] bg-white shadow-2xl h-screen sm:w-[80%] md:w-[400px] ml-auto rounded-l-md overflow-y-scroll [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-lg">
         <div class="px-6 py-4 text-[#707085] flex items-center justify-between border-b">
             <span class="block font-medium text-[12px]"><i class="fa-brands fa-trello mr-2"></i>EA FC 25</span>
             <i class="block fa-solid fa-xmark cursor-pointer"></i>

@@ -484,17 +484,18 @@ const addToStadium = (item, target) => {
         document.querySelector('[post='+target+']').innerHTML = `
             <div class="relative w-[90%]">
                 <img class="w-full mx-auto" src="./assets/rush.png" alt="">
-                <div class="absolute top-0 left-0 w-full h-full inset-0 m-auto px-2 py-2">
+                <div class="absolute top-0 left-0 w-full h-full inset-0 m-auto sm:p-1 md:p-2">
                     <div class="flex">
-                        <div class="mt-4 ml-[11px] text-white *:font-poppins *:block text-[80%]">
-                            <span class="font-bold">${player.rating}</span>
-                            <span class="font-semibold mt-[-8px]">${player.position}</span>
+                        <div class="sm:mt-2 md:mt-4 sm:ml-[4px] md:ml-[11px] text-white *:font-poppins *:block text-[80%]">
+                            <span class="font-bold sm:text-[8px] lg:text-base">${player.rating}</span>
+                            <span class="font-semibold sm:mt-[-4px] md:mt-[-8px] sm:text-[8px] lg:text-base">${player.position}</span>
                         </div>
-                        <img class="w-[70%] h-[70%] object-cover" src="${player.image}" alt="">
+                        <img class="size-[70%] object-cover" src="${player.image}" alt="">
                     </div>
                     <div class="text-white">
-                        <h1 class="text-center text-xs font-semibold mt-1">${player.name}</h1>
-                        <div class="flex justify-around text-[6%] mt-1">
+                        <h1 class="text-center sm:text-[8px] md:text-[10px] font-semibold mt-1 sm:block md:hidden">${player.name.split(' ')[0]}</h1>
+                        <h1 class="text-center sm:text-[8px] md:text-[10px] font-semibold mt-1 sm:hidden md:block">${player.name}</h1>
+                        <div class="sm:hidden md:flex justify-around text-[6%] mt-1">
                             <div class="*:block *:font-semibold">
                                 <span>${player.position != 'GK' ? 'Pac' : 'Div'}</span>
                                 <span>${player.position != 'GK' ? player.pace : player.diving}</span>
@@ -520,9 +521,9 @@ const addToStadium = (item, target) => {
                                 <span>${player.position != 'GK' ? player.physical : player.positioning}</span>
                             </div>
                         </div>
-                        <div class="flex w-fit mx-auto *:w-[18px] *:h-[10px] mt-1">
-                            <img src="${player.flag}" alt="">
-                            <img src="${player.logo}" alt="">
+                        <div class="flex w-fit mx-auto mt-1">
+                            <img class="sm:w-[14px] sm:h-[6px] md:w-[18px] md:h-[10px]" src="${player.flag}" alt="">
+                            <img class="sm:w-[14px] sm:h-[6px] md:w-[18px] md:h-[10px]" src="${player.logo}" alt="">
                         </div>
                     </div>
                 </div>
@@ -618,15 +619,15 @@ function logBrowserClose() {
     localStorage.setItem('selectedPlayers', JSON.stringify(selectedPlayers))
 }
 
-window.addEventListener('unload', logBrowserClose)
-let stadium = localStorage.getItem('stadium') ? JSON.parse(localStorage.getItem('stadium')): []
-selectedPlayers = localStorage.getItem('selectedPlayers') ? JSON.parse(localStorage.getItem('selectedPlayers')): []
+// window.addEventListener('unload', logBrowserClose)
+// let stadium = localStorage.getItem('stadium') ? JSON.parse(localStorage.getItem('stadium')): []
+// selectedPlayers = localStorage.getItem('selectedPlayers') ? JSON.parse(localStorage.getItem('selectedPlayers')): []
 
-if(stadium.length > 0){
-    stadium.forEach((item, index) => {
-        if(item.id)
-            document.querySelectorAll('.stadCard')[index].id = item.id
-        document.querySelectorAll('.stadCard')[index].innerHTML = item.html  
-    })
-    calculateScore()
-}
+// if(stadium.length > 0){
+//     stadium.forEach((item, index) => {
+//         if(item.id)
+//             document.querySelectorAll('.stadCard')[index].id = item.id
+//         document.querySelectorAll('.stadCard')[index].innerHTML = item.html  
+//     })
+//     calculateScore()
+// }
