@@ -216,6 +216,7 @@ Array.from(playersListOpenBtns).forEach(item => {
                 document.getElementById(e.currentTarget.id).innerHTML = `<img class="w-[90%] mx-auto" src="./assets/rush.webp" alt="">`
             }
             document.getElementById(e.currentTarget.id).removeAttribute('id')
+            calculateScore()
         }
     })
 })
@@ -529,8 +530,10 @@ const addToStadium = (item, target) => {
         `
     }
     document.querySelector('[post='+target+']').id = player.id
-    selectedPlayers.push(player.id)
+    if(!selectedPlayers.find(i => i == player.id))
+        selectedPlayers.push(player.id)
     hideModal(playersListModal)
+    calculateScore()
 }
 
 //make a change using drag & drop
@@ -574,3 +577,56 @@ document.querySelectorAll('.stadiumcard').forEach(item => {
         }
     })
 })
+
+//team score
+const calculateScore = () => {
+    let score = 0
+    selectedPlayers.forEach(item => {
+        const player = players.find(i => i.id == item)
+        if(document.getElementById(item).getAttribute('positions')){
+            //add 10 for right position
+            const position = document.getElementById(item).getAttribute('positions').split('-').findIndex(i => i.toLowerCase() == player.position.toLowerCase())
+            if(position != -1){
+                score += 10
+            }
+
+            //club
+            const checkClub = selectedPlayers.find(i => i != player.id && players.find(x => x.id == i).club.toLowerCase() == player.club.toLowerCase())
+            if(checkClub){
+                score += 3
+            }
+
+            const checkNatio = selectedPlayers.find(i => i != player.id && players.find(x => x.id == i).nationality.toLowerCase() == player.nationality.toLowerCase())
+            if(checkNatio){
+                score += 1
+            }
+        }
+    })
+
+    document.getElementById('score').textContent = `score : ${score}`
+}
+
+function logBrowserClose() {
+    let list = []
+    document.querySelectorAll('.stadCard').forEach(item => {
+        list.push({
+            html : item.innerHTML,
+            id: item.id || null 
+        })
+    })
+    localStorage.setItem('stadium', JSON.stringify(list))
+    localStorage.setItem('selectedPlayers', JSON.stringify(selectedPlayers))
+}
+
+window.addEventListener('unload', logBrowserClose)
+let stadium = localStorage.getItem('stadium') ? JSON.parse(localStorage.getItem('stadium')): []
+selectedPlayers = localStorage.getItem('selectedPlayers') ? JSON.parse(localStorage.getItem('selectedPlayers')): []
+
+if(stadium.length > 0){
+    stadium.forEach((item, index) => {
+        if(item.id)
+            document.querySelectorAll('.stadCard')[index].id = item.id
+        document.querySelectorAll('.stadCard')[index].innerHTML = item.html  
+    })
+    calculateScore()
+}
