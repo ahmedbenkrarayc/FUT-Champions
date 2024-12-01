@@ -619,15 +619,15 @@ function logBrowserClose() {
     localStorage.setItem('selectedPlayers', JSON.stringify(selectedPlayers))
 }
 
-// window.addEventListener('unload', logBrowserClose)
-// let stadium = localStorage.getItem('stadium') ? JSON.parse(localStorage.getItem('stadium')): []
-// selectedPlayers = localStorage.getItem('selectedPlayers') ? JSON.parse(localStorage.getItem('selectedPlayers')): []
+window.addEventListener('unload', logBrowserClose)
+let stadium = localStorage.getItem('stadium') ? JSON.parse(localStorage.getItem('stadium')): []
+selectedPlayers = localStorage.getItem('selectedPlayers') ? JSON.parse(localStorage.getItem('selectedPlayers')): []
 
-// if(stadium.length > 0){
-//     stadium.forEach((item, index) => {
-//         if(item.id)
-//             document.querySelectorAll('.stadCard')[index].id = item.id
-//         document.querySelectorAll('.stadCard')[index].innerHTML = item.html  
-//     })
-//     calculateScore()
-// }
+if(stadium.length > 0){
+    stadium.forEach((item, index) => {
+        if(item.id)
+            document.querySelectorAll('.stadCard')[index].id = item.id
+        document.querySelectorAll('.stadCard')[index].innerHTML = item.html  
+    })
+    calculateScore()
+}
